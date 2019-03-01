@@ -30,7 +30,7 @@ const convertCurrency = (url) =>{
 
 
 //currency symbol api
-const url = `https://free.currencyconverterapi.com/api/v5/currencies`;
+const url = `https://free.currencyconverterapi.com/api/v6/currencies?apiKey=04cac1d57911522c5ad1`;
 
 //get currency entries
 fetchCurrency(url)
@@ -83,7 +83,7 @@ const currencyFromServer = () => {
 	const moneyConverted = document.getElementById("moneyConverted");
 
 
-	const xchangeUrl = `https://free.currencyconverterapi.com/api/v5/convert?q=${curr_from}_${curr_to}`;
+	const xchangeUrl = `https://free.currencyconverterapi.com/api/v6/convert?q=${curr_from}_${curr_to}&compact=ultra&apiKey=04cac1d57911522c5ad1`;
 	
 	moneyConverted.innerText = "Converting..."
 
