@@ -70,17 +70,17 @@ const currencyFromServer = () => {
 
 	//input amount to convert
 	const money_to_convert = document.getElementById("moneyInput");
-	if(!isNaN(money_to_convert)) {
-		return false;
+		//displays result of conversion rate
+	const moneyConverted = document.getElementById("moneyConverted");
+
+	if(!isNaN(money_to_convert) || money_to_convert.value == "") {
+		moneyConverted.innerText = "Input format is incorrect"
+		return;
 	}
 
 	//selected currency pairs to convert
 	const curr_from = document.getElementById("curr1").value;
 	const curr_to = document.getElementById("curr2").value;	
-
-	
-		//displays result of conversion rate
-	const moneyConverted = document.getElementById("moneyConverted");
 
 
 	const xchangeUrl = `https://free.currencyconverterapi.com/api/v6/convert?q=${curr_from}_${curr_to}&compact=ultra&apiKey=04cac1d57911522c5ad1`;
@@ -90,10 +90,15 @@ const currencyFromServer = () => {
 	//currency conversion function call returns a promise
 	convertCurrency(xchangeUrl)
 	.then(data => {
-		for(const currency of Object.values(data.results)){
+		//console.log(data)
+		const currencyValue = Object.values(data)
+		const currencySymbol = Object.keys(data)
+			//console.log( currencyValue[0] )
+			//console.log(currencySymbol[0])
 			let answer = parseFloat(money_to_convert.value);
-			moneyConverted.innerText = `${ currency.to }  ${(answer * currency.val).toFixed(4)}`;
-		}						
+
+			moneyConverted.innerText = `${ currencySymbol[0] }  ${(answer * currencyValue[0]).toFixed(2)}`;
+							
 	})
 	.catch(err => {console.log(err)})
 
